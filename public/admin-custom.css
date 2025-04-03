@@ -1,0 +1,32 @@
+/* Remove os títulos "NAVIGATION" e "PAGES" */
+.sc-dmqHEX.sc-jOQpHc.jUnzcS.dOrpSR.adminjs_Box .adminjs_Label {
+  visibility: hidden !important; /* Torna a label invisível */
+  display: none !important;
+}
+
+[data-css='sidebar-resources'],
+[data-css='sidebar'],
+.sc-dmqHEX.sc-jOQpHc.jUnzcS.dOrpSR.adminjs_Box {
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-grow: 0 !important;
+}
+
+.adminjs_Login .adminjs_H1 {
+  content: 'Sistema de Parceiros' !important;
+}
+
+.sc-ilEZps.gdvKyh.sc-hhGHuG.dgJiMC.adminjs_Header.adminjs_H2,
+.sc-gjTGSA.PcRoW.adminjs_Text {
+  visibility: hidden !important;
+  display: none !important;
+  content: 'Seu novo texto aqui' !important;
+}
+
+.sc-ilEZps.gdvKyh.sc-hhGHuG.dgJiMC.adminjs_Header.adminjs_H2::before {
+  content: 'Seu novo texto aqui' !important;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
