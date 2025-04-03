@@ -1,15 +1,14 @@
 FROM node:22.14-alpine
 
-WORKDIR /src/app
+WORKDIR /app
 
 COPY . .
 
 RUN rm -rf ./node_modules
+RUN rm -rf yarn.lock
 
-RUN npm install
-
-RUN npm run build
+RUN yarn
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]

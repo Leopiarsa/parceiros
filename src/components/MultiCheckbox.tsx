@@ -48,7 +48,7 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
 
   const fetchParceiros = async () => {
     try {
-      const response = await fetch(`${process.env.DOMAIN}/parceiros`);
+      const response = await fetch(`/parceiros`);
       if (!response.ok) {
         throw new Error(`Erro: ${response.status}`);
       }

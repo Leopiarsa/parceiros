@@ -41,15 +41,15 @@ const OportunidadeResource = {
       telefone: {
         type: 'string',
         components: {
-          edit: Components.CustomInput,
-          new: Components.CustomInput,
+          edit: Components.InputMasked,
+          new: Components.InputMasked,
         },
         custom: {
           label: 'Telefone',
         },
       },
       endereco: {
-        isVisible: { list: true, show: true, edit: true, filter: false },
+        isVisible: { list: true, show: true, edit: true, filter: true },
         type: 'string',
         components: {
           edit: Components.CustomInput,
@@ -74,7 +74,7 @@ const OportunidadeResource = {
         custom: {
           label: 'Fonte',
         },
-        isVisible: { list: true, show: true, edit: true, filter: false },
+        isVisible: { list: true, show: true, edit: true, filter: true },
         type: 'string',
         components: {
           edit: Components.CustomInput,
@@ -96,11 +96,11 @@ const OportunidadeResource = {
         custom: {
           label: 'CPF',
         },
-        isVisible: { list: true, show: true, edit: true, filter: false },
+        isVisible: { list: true, show: true, edit: true, filter: true },
         type: 'string',
         components: {
-          edit: Components.CustomInput,
-          new: Components.CustomInput,
+          edit: Components.InputMasked,
+          new: Components.InputMasked,
         },
       },
       comentario: {
@@ -134,7 +134,7 @@ const OportunidadeResource = {
         },
       },
       createdAt: {
-        isVisible: { list: false, show: true, edit: false, filter: true },
+        isVisible: { list: true, show: true, edit: false, filter: true },
       },
       updatedAt: {
         isVisible: { list: false, show: true, edit: false, filter: false },

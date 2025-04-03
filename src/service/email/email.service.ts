@@ -8,15 +8,15 @@ export const sendNewOpportunityEmail = async (userName: string, oportunidadeId: 
 
   const html = oportunidadeBody(urlRedirect, userName);
 
-  const msgs = to.map((email => {
+  const msgs = to.map((email) => {
     return {
       to: email,
       from: process.env.EMAIL_FROM,
       subject: 'Uma oportunidade foi criada',
       text: 'Oportunidade criada',
       html: html,
-    }
-  }))
+    };
+  });
 
   sgMail
     .send(msgs)

@@ -47,7 +47,7 @@ export default function InputFileUpload({ record, onChange, property }) {
       fileBuffer: base64File,
     };
 
-    setFileName(`${formData.fileName}.${formData.mimeType}`);
+    setFileName(`${formData.fileName}`);
 
     onChange(property.name, formData);
   };
@@ -55,7 +55,7 @@ export default function InputFileUpload({ record, onChange, property }) {
   useEffect(() => {
     if (fileUrl) {
       const { fileName: currentFileName, extension } = extractFileNameAndExtension(fileUrl);
-      setFileName(`${currentFileName}.${extension}`);
+      setFileName(`${currentFileName}`);
     }
   }, [fileUrl]);
 

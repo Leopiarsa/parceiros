@@ -62,7 +62,7 @@ const AdminDashboard = () => {
   const fetchParceiros = async () => {
     setIsFetching((prevState) => ({ ...prevState, parceiros: true }));
     try {
-      const response = await fetch(`${process.env.DOMAIN}/admin/api/resources/Parceiros/actions/list`);
+      const response = await fetch(`/admin/api/resources/Parceiros/actions/list`);
       const data = await response.json();
       if (data.records) {
         const parceiros: Parceiros[] = data.records.map((records) => records.params);
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
   const fetchOportunidadesByParceiro = async () => {
     setIsFetching((prevState) => ({ ...prevState, oportunidades: true }));
     try {
-      const response = await fetch(`${process.env.DOMAIN}/oportunidades/filter`, {
+      const response = await fetch(`/oportunidades/filter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

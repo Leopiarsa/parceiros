@@ -39,7 +39,7 @@ export class Oportunidades extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   public tipoDeAcao: string;
 
-  @Column({ type: 'varchar', length: 11 })
+  @Column({ type: 'varchar', length: 30 })
   public cpf: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })

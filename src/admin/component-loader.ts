@@ -11,6 +11,7 @@ const Components = {
   FileButtonActions: componentLoader.add('FileButtonActions', '../components/FileActionsButton.tsx'),
   AdminDashboard: componentLoader.add('AdminDashboard', '../components/Dashboard.tsx'),
   CustomInput: componentLoader.add('CustomInput', '../components/CustomInput.tsx'),
+  InputMasked: componentLoader.add('InputMasked', '../components/InputMasked.tsx'),
   CustomSwitch: componentLoader.add('CustomSwitch', '../components/CustomSwitch.tsx'),
   CustomSelect: componentLoader.add('CustomSelect', '../components/CustomSelect.tsx'),
   CustomLink: componentLoader.add('CustomLink', '../components/Link.tsx'),

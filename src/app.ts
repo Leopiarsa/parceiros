@@ -5,7 +5,7 @@ import express from 'express';
 import session from 'express-session';
 import 'reflect-metadata';
 
-import { componentLoader, Components } from '../src/admin/component-loader.js';
+import { componentLoader, Components } from './admin/component-loader.js';
 import provider from './admin/auth-provider.js';
 import initializeDb from './db/index.js';
 import { Roles } from './enums/roles.enum.js';
@@ -16,7 +16,7 @@ import uploadRoute from './routes/file.routes.js';
 import oportunidadesRoute from './routes/oportunidade.route.js';
 import parceiroRoute from './routes/parceiros.routes.js';
 import customRoute from './routes/user.routes.js';
-import { Usuarios } from './entities/user.entity.js';
+import { seed } from './db/seed.js';
 
 const port = process.env.PORT || 3000;
 
@@ -26,7 +26,7 @@ const start = async () => {
   await initializeDb();
 
   const modifyPagesForRole = (role) => {
-    if (role === Roles.Administrador) {
+    if (role === Roles.Administrador || role === Roles.Gerente) {
       admin.options.pages = {
         Dashboard: {
           component: Components.AdminDashboard,
@@ -34,8 +34,8 @@ const start = async () => {
         },
       };
     } else {
-      const { DashBoard, ...pagesWithoutDashboard } = admin.options.pages;
-      admin.options.pages = pagesWithoutDashboard;
+      const sideBarWithoutAnyPages = {};
+      admin.options.pages = sideBarWithoutAnyPages;
     }
   };
 
@@ -126,32 +126,6 @@ const start = async () => {
     next();
   });
 
-  // app.post('/admin/login', express.urlencoded({ extended: true }), async (req, res, next) => {
-  //   const { email, password } = req.body;
-
-  //   const user = await Usuarios.findBy({ email, password });
-
-  //   if (Array.isArray(user) && user.length > 0) {
-  //     (req as any).session.adminUser = user[0];
-  //     const redirectTo = (req as any).session.returnTo || '/admin';
-  //     delete (req as any).session.returnTo;
-  //     return res.redirect(redirectTo);
-  //   } else {
-  //     return res.redirect('/admin/login?error=invalid');
-  //   }
-  // });
-
-  // app.use('/admin', (req: any, res, next) => {
-  //   if (!req.session.adminUser && req.method === 'GET') {
-  //     // Funciona somente para o redirect de oportunidades, pq na hora de validar o login nao aparece a mensagem de erro. Linha 135
-  //     if ((req.originalUrl as string).includes('/admin/resources/Oportunidades')) {
-  //       req.session.returnTo = req.originalUrl;
-  //       console.log('return to url', req.session.returnTo)
-  //     }
-  //   }
-  //   next();
-  // });
-
   const router = buildAuthenticatedRouter(admin, {
     cookiePassword: process.env.COOKIE_SECRET,
     cookieName: 'adminjs',
@@ -166,6 +140,7 @@ const start = async () => {
   app.use('/oportunidades', oportunidadesRoute);
   app.listen(port, () => {
     console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
+    seed();
   });
 };
 
