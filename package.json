@@ -7,7 +7,7 @@
     "lint": "eslint \"src\"",
     "dev": "tsx --watch src/app.ts",
     "generate-bundles": "rm -rf ./dist && tsc && node dist/src/admin/bundle-admin.js",
-    "prod": "export NODE_ENV=production && export ADMIN_JS_SKIP_BUNDLE=\"true\" && tsx src/app.ts",
+    "prod": "export NODE_ENV=production && export ADMIN_JS_SKIP_BUNDLE=\"true\" && export DOMAIN=http://143.198.238.248:3000 && tsx src/app.ts",
     "typeorm": "tsx node_modules/.bin/typeorm",
     "migration:generate": "tsx node_modules/.bin/typeorm migration:generate -d src/db/data-source.ts",
     "migration:run": "tsx node_modules/.bin/typeorm migration:run -d src/db/data-source.ts",
