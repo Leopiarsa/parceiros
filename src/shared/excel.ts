@@ -12,6 +12,7 @@ export const handleExportExcel = async (filteredOPortunities: any[]) => {
     Nome: item.nome ? item.nome.toUpperCase() : '',
     Fonte: item.fonte ? item.fonte.toUpperCase() : '',
     Endereço: item.endereco ? item.endereco.toUpperCase() : '',
+    'Princípio Ativo': item.principioAtivo ? item.principioAtivo.toUpperCase() : '',
     CPF: item.cpf || '',
     'Tipo De Contato': item.tipoDeContato ? item.tipoDeContato.toUpperCase() : '',
     'Tipo De Ação': item.tipoDeAcao ? item.tipoDeAcao.toUpperCase() : '',
@@ -19,7 +20,7 @@ export const handleExportExcel = async (filteredOPortunities: any[]) => {
 
   const ws = XLSX.utils.json_to_sheet(formattedData);
 
-  const wscols = [{ wpx: 200 }, { wpx: 200 }, { wpx: 200 }, { wpx: 200 }, { wpx: 200 }, { wpx: 200 }];
+  const wscols = [{ wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }, { wpx: 120 }];
   ws['!cols'] = wscols;
 
   const range = XLSX.utils.decode_range(ws['!ref']);

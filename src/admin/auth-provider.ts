@@ -1,7 +1,6 @@
 import { DefaultAuthProvider } from 'adminjs';
 
 import { componentLoader } from './component-loader.js';
-import { DEFAULT_ADMIN } from './constants.js';
 import { Usuarios } from '../entities/user.entity.js';
 import bcrypt from 'bcryptjs';
 

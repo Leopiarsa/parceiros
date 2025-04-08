@@ -1,6 +1,5 @@
 import {
   AfterInsert,
-  AfterUpdate,
   BaseEntity,
   BeforeInsert,
   BeforeUpdate,
@@ -24,40 +23,55 @@ export class Oportunidades extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   public nome: string;
 
+  @Column({ type: 'varchar', length: 30 })
+  public cpf: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  public cep: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  public cidade: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  public logradouro: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  public email: string;
+
   @Column({ type: 'varchar', length: 255 })
   public telefone: string;
-
-  @Column({ type: 'varchar', length: 255 })
-  public endereco: string;
-
-  @Column({ type: 'varchar', length: 255 })
-  public tipoDeContato: string;
 
   @Column({ type: 'varchar', length: 255 })
   public fonte: string;
 
   @Column({ type: 'varchar', length: 255 })
+  public tipoDeContato: string;
+
+  @Column({ type: 'varchar', length: 255 })
   public tipoDeAcao: string;
 
-  @Column({ type: 'varchar', length: 30 })
-  public cpf: string;
+  @Column({ type: 'varchar', length: 255 })
+  public principioAtivo: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  public observacao: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   public comentario: string;
+
+  @ManyToMany(() => Parceiros, (parceiro) => parceiro.oportunidades, { cascade: false })
+  @JoinTable()
+  public parceiros: Parceiros[];
+
+  // Não alterar a ordem desse campo, pois altera a visualizaçao no form de criar/editar oportunidade
+  @Column({ name: 'file_path', nullable: true, type: 'text' })
+  public arquivo: string;
 
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   public updatedAt: Date;
-
-  // Não alterar a ordem desse campo, pois altera a visualizaçao no form de criar/editar oportunidade
-  @Column({ name: 'file_path', nullable: true, type: 'text' })
-  public arquivo: string;
-
-  @ManyToMany(() => Parceiros, (parceiro) => parceiro.oportunidades, { cascade: false })
-  @JoinTable()
-  public parceiros: Parceiros[];
 
   @BeforeInsert()
   @BeforeUpdate()

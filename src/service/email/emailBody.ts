@@ -1,4 +1,4 @@
-import { Usuarios } from '@/src/entities/user.entity.js';
+import { Usuarios } from '../../entities/user.entity.js';
 
 export const oportunidadeBody = (urlRedirect: string, userName: string) => {
   return `

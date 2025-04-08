@@ -13,6 +13,9 @@ export class Parceiros extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   public email: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  public telefone: string;
+
   @Column({ type: 'bool', default: true })
   public ativo: boolean;
 

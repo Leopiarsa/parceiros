@@ -20,9 +20,6 @@ import { useEffect, useState } from 'react';
 import { Oportunidades } from '../entities/oportunidade.entity.js';
 import { Parceiros } from '../entities/parceiro.entity.js';
 import { handleExportExcel } from '../shared/excel.js';
-import MultiCheckbox from './MultiCheckbox.js';
-import { Roles } from '../enums/roles.enum.js';
-import CustomSelect from './CustomSelect.js';
 
 interface availableValues {
   value: number | string;
@@ -50,7 +47,8 @@ const AdminDashboard = () => {
     const table = oportunidades.map((oportunidade) => ({
       nome: oportunidade.nome,
       fonte: oportunidade.fonte,
-      endereco: oportunidade.endereco,
+      endereco: oportunidade.cep,
+      principioAtivo: oportunidade.principioAtivo,
       cpf: oportunidade.cpf,
       tipoDeContato: oportunidade.tipoDeContato,
       tipoDeAcao: oportunidade.tipoDeAcao,
@@ -180,7 +178,8 @@ const AdminDashboard = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">Nome </TableCell>
+              <TableCell align="center">Nome</TableCell>
+              <TableCell align="center">E-mail</TableCell>
               <TableCell align="center">Endereco</TableCell>
               <TableCell align="center">Cpf</TableCell>
               <TableCell align="center">Telefone</TableCell>
@@ -191,7 +190,8 @@ const AdminDashboard = () => {
             {oportunidades.map((item) => (
               <TableRow key={item.id} onClick={() => console.log('ITEM ID: ', item.id)}>
                 <TableCell align="center">{item.nome}</TableCell>
-                <TableCell align="center">{item.endereco}</TableCell>
+                <TableCell align="center">{item.email}</TableCell>
+                <TableCell align="center">{item.cep}</TableCell>
                 <TableCell align="center">{item.cpf}</TableCell>
                 <TableCell align="center">{item.telefone}</TableCell>
                 <TableCell align="center">{new Date(item.createdAt).toISOString().split('T')[0]}</TableCell>

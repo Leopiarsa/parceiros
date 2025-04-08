@@ -1,21 +1,18 @@
-import bcrypt from 'bcryptjs';
 import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
   BaseEntity,
-  BeforeInsert,
-  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
-  getRepository,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Roles } from '../enums/roles.enum.js';
 import { Parceiros } from './parceiro.entity.js';
 import DataSource from '../db/data-source.js';
 import { sendNewUserEmail } from '../service/email/email.service.js';
+
 @Entity({ name: 'usuarios' })
 export class Usuarios extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -26,6 +23,9 @@ export class Usuarios extends BaseEntity {
 
   @Column({ type: 'varchar', length: 255 })
   public email: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  public telefone: string;
 
   @Column({ type: 'varchar', length: 255 })
   public password: string;
@@ -41,6 +41,7 @@ export class Usuarios extends BaseEntity {
     if (this.role === Roles.Parceiro) {
       const parceiro = new Parceiros();
       parceiro.email = this.email;
+      parceiro.telefone = this.telefone;
       parceiro.nome = this.name;
       parceiro.userID = this.id;
       parceiro.save();
@@ -54,15 +55,19 @@ export class Usuarios extends BaseEntity {
 
   @AfterUpdate()
   async updatePartnerIfNecessary() {
+    const partnerRepo = DataSource.getRepository(Parceiros);
+    const parceiro = await Parceiros.findOne({ where: { userID: this.id } });
     if (this.role === Roles.Parceiro) {
-      const partnerRepo = DataSource.getRepository(Parceiros);
-      const partner = await Parceiros.findOne({ where: { userID: this.id } });
+      if (parceiro) {
+        parceiro.email = this.email;
+        parceiro.nome = this.name;
+        parceiro.telefone = this.telefone;
 
-      if (partner) {
-        partner.email = this.email;
-        partner.nome = this.name;
-
-        await partnerRepo.save(partner);
+        await partnerRepo.save(parceiro);
+      }
+    } else {
+      if (parceiro) {
+        parceiro.remove();
       }
     }
   }

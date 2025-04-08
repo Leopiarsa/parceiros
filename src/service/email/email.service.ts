@@ -1,4 +1,4 @@
-import { Usuarios } from '@/src/entities/user.entity.js';
+import { Usuarios } from '../../entities/user.entity.js';
 import sgMail from '@sendgrid/mail';
 import { newUserBody, oportunidadeBody } from './emailBody.js';
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);

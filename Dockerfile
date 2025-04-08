@@ -7,7 +7,11 @@ COPY . .
 RUN rm -rf ./node_modules
 RUN rm -rf yarn.lock
 
+
 RUN yarn
+
+RUN rm -rf dist
+RUN yarn build
 
 EXPOSE 3000
 

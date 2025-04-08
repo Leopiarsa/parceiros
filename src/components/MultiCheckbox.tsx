@@ -86,7 +86,10 @@ const MultiCheckbox: React.FC<MultiCheckboxProps> = ({
           </li>
         );
       }}
-      style={{ marginBottom: '12px' }}
+      style={{
+        marginTop: '12px',
+        marginBottom: '12px',
+      }}
       renderInput={(params) => (
         <TextField
           {...params}

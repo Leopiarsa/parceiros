@@ -1,7 +1,8 @@
-import { Usuarios } from 'src/entities/user.entity.js';
 import { Not } from 'typeorm';
 import { Components } from '../admin/component-loader.js';
 import dataSource from '../db/data-source.js';
+// import { Usuarios } from '../entities/user.entity.js';
+import { Usuarios } from 'src/entities/user.entity.js';
 import { Roles } from '../enums/roles.enum.js';
 
 const UserResource = {
@@ -19,8 +20,8 @@ const UserResource = {
           new: Components.CustomInput,
         },
         custom: {
-          label: 'Nome'
-        }
+          label: 'Nome',
+        },
       },
       email: {
         type: 'string',
@@ -29,8 +30,19 @@ const UserResource = {
           new: Components.CustomInput,
         },
         custom: {
-          label: 'Email'
-        }
+          label: 'Email',
+        },
+      },
+      telefone: {
+        type: 'string',
+        components: {
+          edit: Components.InputMasked,
+          new: Components.InputMasked,
+        },
+        custom: {
+          label: 'Telefone',
+        },
+        isVisible: { list: true, show: true, edit: true, filter: false, create: true },
       },
       id: {
         isVisible: { list: false, show: false, edit: false, filter: false },
@@ -44,8 +56,8 @@ const UserResource = {
           show: Components.RoleBadge,
         },
         custom: {
-          label: 'Perfil'
-        }
+          label: 'Perfil',
+        },
       },
       createdAt: {
         isVisible: { list: false, show: false, edit: false, filter: false },
@@ -87,10 +99,10 @@ const UserResource = {
           }
 
           // if (request.payload.password) {
-            // if (!request.payload.password.startsWith('$2b$')) {
-              // const salt = await bcrypt.genSalt(10);
-              // request.payload.password = await bcrypt.hash(request.payload.password, salt);
-            // }
+          // if (!request.payload.password.startsWith('$2b$')) {
+          // const salt = await bcrypt.genSalt(10);
+          // request.payload.password = await bcrypt.hash(request.payload.password, salt);
+          // }
           // }
 
           return request;

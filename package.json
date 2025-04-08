@@ -3,17 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc && node dist/src/admin/bundle-admin.js",
     "lint": "eslint \"src\"",
     "dev": "tsx --watch src/app.ts",
+    "prod": "export NODE_ENV=production && export ADMIN_JS_SKIP_BUNDLE=\"true\" && tsx src/app.ts",
     "typeorm": "tsx node_modules/.bin/typeorm",
     "migration:generate": "tsx node_modules/.bin/typeorm migration:generate -d src/db/data-source.ts",
     "migration:run": "tsx node_modules/.bin/typeorm migration:run -d src/db/data-source.ts",
-    "migration:rollback": "tsx node_modules/.bin/typeorm migration:revert -d src/db/data-source.ts",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "migration:rollback": "tsx node_modules/.bin/typeorm migration:revert -d src/db/data-source.ts"
   },
   "dependencies": {
+    "@adminjs/bundler": "^3.0.0",
     "@adminjs/express": "^6.1.0",
     "@adminjs/typeorm": "^5.0.1",
     "@adminjs/upload": "^4.0.2",

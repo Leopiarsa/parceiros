@@ -18,6 +18,7 @@ const CustomInput: React.FC<BasePropertyProps> = (props) => {
       value={value}
       onChange={handleChange}
       fullWidth
+      disabled={property?.custom?.disabled}
       variant="outlined"
       style={{
         marginTop: '12px',

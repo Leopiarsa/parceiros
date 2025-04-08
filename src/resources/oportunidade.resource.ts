@@ -12,9 +12,43 @@ const OportunidadeResource = {
       icon: 'Anchor',
     },
     name: 'Oportunidades',
+    listProperties: [
+      'id',
+      'email',
+      'nome',
+      'cpf',
+      'cep',
+      'cidade',
+      'logradouro',
+      'telefone'
+    ],
+    editProperties: [
+      'id',
+      'nome',
+      'cpf',
+      'cep',
+      'cidade',
+      'logradouro',
+      'email',
+      'telefone',
+      'principioAtivo',
+      'fonte',
+      'tipoDeContato',
+      'tipoDeAcao',
+      'observacao',
+      'comentario',
+      'parceiros'
+    ],
     properties: {
       id: {
-        isVisible: { list: false, show: false, edit: false, filter: false },
+        custom: {
+          label: 'Número do Pedido (Gerado automaticamente)',
+          disabled: true
+        },
+        components: {
+          edit: Components.CustomInput,
+        },
+        isVisible: { list: true, show: true, edit: false, filter: false, new: false },
       },
       arquivo: {
         isVisible: { list: false, show: true, edit: true, filter: false },
@@ -48,7 +82,29 @@ const OportunidadeResource = {
           label: 'Telefone',
         },
       },
-      endereco: {
+      email: {
+        type: 'string',
+        components: {
+          edit: Components.CustomInput,
+          new: Components.CustomInput,
+        },
+        custom: {
+          label: 'Email',
+        },
+        isVisible: { list: true, show: true, edit: true, filter: true },
+      },
+      cep: {
+        isVisible: { list: true, show: true, edit: true, filter: true },
+        type: 'string',
+        components: {
+          edit: Components.InputMasked,
+          new: Components.InputMasked,
+        },
+        custom: {
+          label: 'CEP',
+        },
+      },
+      cidade: {
         isVisible: { list: true, show: true, edit: true, filter: true },
         type: 'string',
         components: {
@@ -56,7 +112,18 @@ const OportunidadeResource = {
           new: Components.CustomInput,
         },
         custom: {
-          label: 'Endereço',
+          label: 'Cidade',
+        },
+      },
+      logradouro: {
+        isVisible: { list: true, show: true, edit: true, filter: true },
+        type: 'string',
+        components: {
+          edit: Components.CustomInput,
+          new: Components.CustomInput,
+        },
+        custom: {
+          label: 'Logradouro',
         },
       },
       tipoDeContato: {
@@ -101,6 +168,28 @@ const OportunidadeResource = {
         components: {
           edit: Components.InputMasked,
           new: Components.InputMasked,
+        },
+      },
+      principioAtivo: {
+        custom: {
+          label: 'Princípio ativo',
+        },
+        isVisible: { list: false, show: true, edit: true, filter: false },
+        type: 'string',
+        components: {
+          edit: Components.CustomInput,
+          new: Components.CustomInput,
+        },
+      },
+      observacao: {
+        custom: {
+          label: 'Observação',
+        },
+        isVisible: { list: false, show: true, edit: true, filter: false },
+        type: 'string',
+        components: {
+          edit: Components.CustomInput,
+          new: Components.CustomInput,
         },
       },
       comentario: {
@@ -292,12 +381,18 @@ const OportunidadeResource = {
           request.payload = {
             nome: request.payload.nome,
             telefone: request.payload.telefone,
+            email: request.payload.email,
             endereco: request.payload.endereco,
             arquivo: request.payload.arquivo,
             tipoDeContato: request.payload.tipoDeContato,
             fonte: request.payload.fonte,
             tipoDeAcao: request.payload.tipoDeAcao,
             cpf: request.payload.cpf,
+            cep: request.payload.cep,
+            cidade: request.payload.cidade,
+            principioAtivo: request.payload.principioAtivo,
+            logradouro: request.payload.logradouro,
+            observacao: request.payload.observacao,
             comentario: request.payload.comentario,
             parceiros: partnerKeysFromDB,
           };
